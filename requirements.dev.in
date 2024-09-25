@@ -1,0 +1,8 @@
+-r examples/requirements/base.in
+-r examples/requirements/common.in
+-r examples/requirements/code_style.in
+-r examples/requirements/debug.in
+-r examples/requirements/dev.in
+-r examples/requirements/docs.in
+-r examples/requirements/test.in
+-r examples/requirements/testing.in
