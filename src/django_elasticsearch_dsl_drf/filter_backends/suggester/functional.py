@@ -6,66 +6,66 @@ properly indexed using ``fields.CompletionField``.
 
 Example:
 
-    >>> from django_elasticsearch_dsl import Document, Index, fields
+    from django_elasticsearch_dsl import Document, Index, fields
     >>>
-    >>> from books.models import Publisher
+    from books.models import Publisher
     >>>
-    >>> # Name of the Elasticsearch index
-    >>> PUBLISHER_INDEX = Index(PUBLISHER_INDEX_NAME)
-    >>> # See Elasticsearch Indices API reference for available settings
-    >>> PUBLISHER_INDEX.settings(
-    >>>     number_of_shards=1,
-    >>>     number_of_replicas=1
-    >>> )
+    # Name of the Elasticsearch index
+    PUBLISHER_INDEX = Index(PUBLISHER_INDEX_NAME)
+    # See Elasticsearch Indices API reference for available settings
+    PUBLISHER_INDEX.settings(
+        number_of_shards=1,
+        number_of_replicas=1
+    )
     >>>
-    >>> @PUBLISHER_INDEX.doc_type
-    >>> class PublisherDocument(Document):
-    >>>     "Publisher Elasticsearch document."
+    @PUBLISHER_INDEX.doc_type
+    class PublisherDocument(Document):
+        "Publisher Elasticsearch document."
     >>>
-    >>>     id = fields.IntegerField(attr='id')
+        id = fields.IntegerField(attr='id')
     >>>
-    >>>     name = fields.StringField(
-    >>>         fields={
-    >>>             'raw': fields.StringField(analyzer='keyword'),
-    >>>             'suggest': fields.CompletionField(),
-    >>>         }
-    >>>     )
+        name = fields.StringField(
+            fields={
+                'raw': fields.StringField(analyzer='keyword'),
+                'suggest': fields.CompletionField(),
+            }
+        )
     >>>
-    >>>     info = fields.StringField()
+        info = fields.StringField()
     >>>
-    >>>     address = fields.StringField(
-    >>>         fields={
-    >>>             'raw': fields.StringField(analyzer='keyword')
-    >>>         }
-    >>>     )
+        address = fields.StringField(
+            fields={
+                'raw': fields.StringField(analyzer='keyword')
+            }
+        )
     >>>
-    >>>     city = fields.StringField(
-    >>>         fields={
-    >>>             'raw': fields.StringField(analyzer='keyword'),
-    >>>             'suggest': fields.CompletionField(),
-    >>>         }
-    >>>     )
+        city = fields.StringField(
+            fields={
+                'raw': fields.StringField(analyzer='keyword'),
+                'suggest': fields.CompletionField(),
+            }
+        )
     >>>
-    >>>     state_province = fields.StringField(
-    >>>         fields={
-    >>>             'raw': fields.StringField(analyzer='keyword'),
-    >>>             'suggest': fields.CompletionField(),
-    >>>         }
-    >>>     )
+        state_province = fields.StringField(
+            fields={
+                'raw': fields.StringField(analyzer='keyword'),
+                'suggest': fields.CompletionField(),
+            }
+        )
     >>>
-    >>>     country = fields.StringField(
-    >>>         fields={
-    >>>             'raw': fields.StringField(analyzer='keyword'),
-    >>>             'suggest': fields.CompletionField(),
-    >>>         }
-    >>>     )
+        country = fields.StringField(
+            fields={
+                'raw': fields.StringField(analyzer='keyword'),
+                'suggest': fields.CompletionField(),
+            }
+        )
     >>>
-    >>>     website = fields.StringField()
+        website = fields.StringField()
     >>>
-    >>>     class Meta:
-    >>>         "Meta options."
+        class Meta:
+            "Meta options."
     >>>
-    >>>         model = Publisher  # The model associate with this Document
+            model = Publisher  # The model associate with this Document
 """
 from elasticsearch_dsl.search_base import AggsProxy
 
@@ -103,60 +103,56 @@ class FunctionalSuggesterFilterBackend(BaseFilterBackend, FilterBackendMixin):
 
     Example:
 
-        >>> from django_elasticsearch_dsl_drf.constants import (
-        >>>     FUNCTIONAL_SUGGESTER_COMPLETION_MATCH,
-        >>>     FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
-        >>>     FUNCTIONAL_SUGGESTER_PHRASE_MATCH,
-        >>>     FUNCTIONAL_SUGGESTER_PHRASE_MATCH,
-        >>>     FUNCTIONAL_SUGGESTER_TERM_MATCH,
-        >>> )
-        >>> from django_elasticsearch_dsl_drf.filter_backends import (
-        >>>     FunctionalSuggesterFilterBackend
-        >>> )
-        >>> from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
-        >>>
-        >>> # Local PublisherDocument definition
-        >>> from .documents import PublisherDocument
-        >>>
-        >>> # Local PublisherDocument serializer
-        >>> from .serializers import PublisherDocumentSerializer
-        >>>
-        >>> class PublisherDocumentView(DocumentViewSet):
-        >>>
-        >>>     document = PublisherDocument
-        >>>     serializer_class = PublisherDocumentSerializer
-        >>>     filter_backends = [
-        >>>         # ...
-        >>>         FunctionalSuggesterFilterBackend,
-        >>>     ]
-        >>>     # Suggester fields
-        >>>     functional_suggester_fields = {
-        >>>         'name_suggest': {
-        >>>             'field': 'name.suggest',
-        >>>             'suggesters': [
-        >>>                 FUNCTIONAL_SUGGESTER_COMPLETION_MATCH,
-        >>>                 FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
-        >>>             ],
-        >>>         },
-        >>>         'city_suggest': {
-        >>>             'field': 'city.suggest',
-        >>>             'suggesters': [
-        >>>                 FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
-        >>>             ],
-        >>>         },
-        >>>         'state_province_suggest': {
-        >>>             'field': 'state_province.suggest',
-        >>>             'suggesters': [
-        >>>                 FUNCTIONAL_SUGGESTER_COMPLETION_MATCH,
-        >>>             ],
-        >>>         },
-        >>>         'country_suggest': {
-        >>>             'field': 'country.suggest',
-        >>>             'suggesters': [
-        >>>                 FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
-        >>>             ],
-        >>>         },
-        >>>     }
+        from django_elasticsearch_dsl_drf.constants import (
+            FUNCTIONAL_SUGGESTER_COMPLETION_MATCH,
+            FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
+            FUNCTIONAL_SUGGESTER_PHRASE_MATCH,
+            FUNCTIONAL_SUGGESTER_PHRASE_MATCH,
+            FUNCTIONAL_SUGGESTER_TERM_MATCH,
+        )
+        from django_elasticsearch_dsl_drf.filter_backends import (
+            FunctionalSuggesterFilterBackend
+        )
+        from django_elasticsearch_dsl_drf.viewsets import DocumentViewSet
+        # Local PublisherDocument definition
+        from .documents import PublisherDocument
+        # Local PublisherDocument serializer
+        from .serializers import PublisherDocumentSerializer
+        class PublisherDocumentView(DocumentViewSet):
+            document = PublisherDocument
+            serializer_class = PublisherDocumentSerializer
+            filter_backends = [
+                # ...
+                FunctionalSuggesterFilterBackend,
+            ]
+            # Suggester fields
+            functional_suggester_fields = {
+                'name_suggest': {
+                    'field': 'name.suggest',
+                    'suggesters': [
+                        FUNCTIONAL_SUGGESTER_COMPLETION_MATCH,
+                        FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
+                    ],
+                },
+                'city_suggest': {
+                    'field': 'city.suggest',
+                    'suggesters': [
+                        FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
+                    ],
+                },
+                'state_province_suggest': {
+                    'field': 'state_province.suggest',
+                    'suggesters': [
+                        FUNCTIONAL_SUGGESTER_COMPLETION_MATCH,
+                    ],
+                },
+                'country_suggest': {
+                    'field': 'country.suggest',
+                    'suggesters': [
+                        FUNCTIONAL_SUGGESTER_COMPLETION_PREFIX,
+                    ],
+                },
+            }
     """
 
     @classmethod
