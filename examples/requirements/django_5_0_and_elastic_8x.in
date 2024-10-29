@@ -1,1 +1,2 @@
+-r django_5_0.in
 -r elastic_8x.in

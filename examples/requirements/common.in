@@ -1,6 +1,4 @@
-#-r elastic.txt
-
-python-memcached==1.58
+python-memcached
 pytz
-six>=1.9
+six
 Pillow

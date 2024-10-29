@@ -9,7 +9,7 @@ import unittest
 from django.core.management import call_command
 from django.urls import reverse
 
-from elasticsearch.connection.base import Connection
+from elasticsearch import Connection
 
 import pytest
 
