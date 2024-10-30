@@ -2,7 +2,6 @@ from django.conf import settings
 from django_elasticsearch_dsl import Document, Index, fields
 from django_elasticsearch_dsl_drf.compat import KeywordField, StringField
 from django_elasticsearch_dsl_drf.analyzers import edge_ngram_completion
-from django_elasticsearch_dsl_drf.versions import ELASTICSEARCH_GTE_5_0
 from elasticsearch_dsl import analyzer
 
 from books.models import Location
@@ -34,28 +33,6 @@ class LocationDocument(Document):
             ),
         }
 
-    if ELASTICSEARCH_GTE_5_0:
-        __full_fields.update(
-            {
-                "suggest": fields.CompletionField(),
-                "context": fields.CompletionField(
-                    contexts=[
-                        {
-                            "name": "category",
-                            "type": "category",
-                            "path": "category.raw",
-                        },
-                        {
-                            "name": "occupied",
-                            "type": "category",
-                            "path": "occupied.raw",
-                        },
-                    ]
-                ),
-
-            }
-        )
-
     full = StringField(
         analyzer=html_strip,
         fields=__full_fields
@@ -69,26 +46,7 @@ class LocationDocument(Document):
             analyzer=edge_ngram_completion
             ),
     }
-    if ELASTICSEARCH_GTE_5_0:
-        __partial_fields.update(
-            {
-                "suggest": fields.CompletionField(),
-                "context": fields.CompletionField(
-                    contexts=[
-                        {
-                            "name": "category",
-                            "type": "category",
-                            "path": "category.raw",
-                        },
-                        {
-                            "name": "occupied",
-                            "type": "category",
-                            "path": "occupied.raw",
-                        },
-                    ]
-                ),
-            }
-        )
+
     partial = StringField(
         analyzer=html_strip,
         fields=__partial_fields
@@ -98,26 +56,7 @@ class LocationDocument(Document):
     __postcode_fields = {
         "raw": KeywordField(),
     }
-    if ELASTICSEARCH_GTE_5_0:
-        __postcode_fields.update(
-            {
-                "suggest": fields.CompletionField(),
-                "context": fields.CompletionField(
-                    contexts=[
-                        {
-                            "name": "category",
-                            "type": "category",
-                            "path": "category.raw",
-                        },
-                        {
-                            "name": "occupied",
-                            "type": "category",
-                            "path": "occupied.raw",
-                        },
-                    ]
-                ),
-            }
-        )
+
     postcode = StringField(
         analyzer=html_strip,
         fields=__postcode_fields

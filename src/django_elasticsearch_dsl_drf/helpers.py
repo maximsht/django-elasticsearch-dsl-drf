@@ -11,8 +11,6 @@ from elasticsearch_dsl.query import MoreLikeThis
 
 from six import PY3
 
-from .versions import ELASTICSEARCH_GTE_7_0
-
 __title__ = 'django_elasticsearch_dsl_drf.helpers'
 __author__ = 'Artur Barseghyan <artur.barseghyan@gmail.com>'
 __copyright__ = '2017-2020 Artur Barseghyan'
@@ -151,8 +149,8 @@ def more_like_this(obj,
         '_id': "{}".format(obj.pk),
         '_index': "{}".format(_index),
     }
-    if not ELASTICSEARCH_GTE_7_0:
-        _like_options.update({'_type': "{}".format(_mapping)})
+
+    _like_options.update({'_type': "{}".format(_mapping)})
 
     return _search.query(
         MoreLikeThis(

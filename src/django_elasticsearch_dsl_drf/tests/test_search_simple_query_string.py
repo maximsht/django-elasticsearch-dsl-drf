@@ -19,7 +19,6 @@ from search_indexes.viewsets import (
     BookSimpleQueryStringSearchFilterBackendDocumentViewSet
 )
 from ..filter_backends import SimpleQueryStringSearchFilterBackend
-from ..versions import ELASTICSEARCH_GTE_6_0
 
 from .base import (
     BaseRestFrameworkTestCase,
@@ -239,7 +238,6 @@ class TestSimpleQueryStringSearch(BaseRestFrameworkTestCase):
             url=url
         )
 
-    @unittest.skipIf(condition=ELASTICSEARCH_GTE_6_0, reason="")
     def test_search_without_quotes(self, url=None):
         """Test search without quotes. This does not work on Elasticsearch 6.x.
 
@@ -317,7 +315,6 @@ class TestSimpleQueryStringSearch(BaseRestFrameworkTestCase):
             url=url
         )
 
-    @unittest.skipIf(condition=ELASTICSEARCH_GTE_6_0, reason="")
     def test_search_without_quotes_boost(self, url=None):
         """Search boost without quotes. Does not work on Elasticsearch 6.x.
 

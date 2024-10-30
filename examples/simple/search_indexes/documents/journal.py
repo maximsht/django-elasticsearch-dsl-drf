@@ -3,7 +3,6 @@ from django.conf import settings
 from django_elasticsearch_dsl import Document, Index, fields
 from django_elasticsearch_dsl_drf.compat import KeywordField, StringField
 from django_elasticsearch_dsl_drf.analyzers import edge_ngram_completion
-from django_elasticsearch_dsl_drf.versions import ELASTICSEARCH_GTE_5_0
 
 from books.models import Journal
 
@@ -19,7 +18,6 @@ INDEX.settings(
     number_of_shards=1,
     number_of_replicas=1,
     blocks={'read_only_allow_delete': None},
-    # read_only_allow_delete=False
 )
 
 
@@ -96,8 +94,6 @@ class JournalDocument(Document):
 
     class Meta:
         parallel_indexing = True
-        # queryset_pagination = 50  # This will split the queryset
-        #                           # into parts while indexing
 
     def prepare_summary(self, instance):
         """Prepare summary."""

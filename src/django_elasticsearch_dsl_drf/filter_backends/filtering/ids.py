@@ -28,7 +28,6 @@ Official Elastic docs:
 
 from rest_framework.filters import BaseFilterBackend
 
-from ...versions import ELASTICSEARCH_LTE_6_0
 from ..mixins import FilterBackendMixin
 
 __title__ = 'django_elasticsearch_dsl_drf.filter_backends.filtering.ids'
@@ -40,27 +39,6 @@ __all__ = ('IdsFilterBackend',)
 
 class IdsFilterBackend(BaseFilterBackend, FilterBackendMixin):
     """Ids filter backend for Elasticsearch.
-
-    Example:
-
-        >>> from django_elasticsearch_dsl_drf.filter_backends import (
-        >>>     IdsFilterBackend
-        >>> )
-        >>> from django_elasticsearch_dsl_drf.viewsets import (
-        >>>     BaseDocumentViewSet,
-        >>> )
-        >>>
-        >>> # Local article document definition
-        >>> from .documents import ArticleDocument
-        >>>
-        >>> # Local article document serializer
-        >>> from .serializers import ArticleDocumentSerializer
-        >>>
-        >>> class ArticleDocumentView(BaseDocumentViewSet):
-        >>>
-        >>>     document = ArticleDocument
-        >>>     serializer_class = ArticleDocumentSerializer
-        >>>     filter_backends = [IdsFilterBackend]
     """
 
     ids_query_param = 'ids'
@@ -114,9 +92,6 @@ class IdsFilterBackend(BaseFilterBackend, FilterBackendMixin):
             # Prior 7.x ``type`` argument was accepted. Starting from 7.x
             # it has been deprecated. As long as 6.x is supported, this
             # should stay.
-            if ELASTICSEARCH_LTE_6_0:
-                _qs_kwargs.update({'type': view.mapping})
-
             queryset = queryset.query(
                 'ids',
                 **_qs_kwargs
