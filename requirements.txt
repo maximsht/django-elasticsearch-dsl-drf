@@ -12,38 +12,38 @@ certifi==2024.8.30
     # via elastic-transport
 django==5.1.2
     # via
-    #   -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    #   -r examples/requirements/django_5_1.in
     #   django-cors-headers
     #   django-debug-toolbar
     #   django-nine
     #   djangorestframework
 django-cors-headers==4.6.0
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    # via -r examples/requirements/django_5_1.in
 django-debug-toolbar==4.4.6
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    # via -r examples/requirements/django_5_1.in
 django-debug-toolbar-force==0.2
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    # via -r examples/requirements/django_5_1.in
 django-elasticsearch-debug-toolbar==3.0.2
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    # via -r examples/requirements/django_5_1.in
 django-elasticsearch-dsl==8.0
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/elastic_8x.in
+    # via -r examples/requirements/elastic_8x.in
 django-nine==0.2.7
     # via
     #   django-debug-toolbar-force
     #   django-ormex
 django-ormex==0.2.1
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    # via -r examples/requirements/django_5_1.in
 djangorestframework==3.15.2
-    # via -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/django_5_1.in
+    # via -r examples/requirements/django_5_1.in
 elastic-transport==8.15.1
     # via elasticsearch
 elasticsearch==8.15.1
     # via
-    #   -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/elastic_8x.in
+    #   -r examples/requirements/elastic_8x.in
     #   elasticsearch-dsl
 elasticsearch-dsl==8.15.4
     # via
-    #   -r /hdd/GitHub/django-elasticsearch-dsl-drf/examples/requirements/elastic_8x.in
+    #   -r examples/requirements/elastic_8x.in
     #   django-elasticsearch-dsl
 packaging==24.1
     # via django-nine
